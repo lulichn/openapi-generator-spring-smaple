@@ -1,0 +1,35 @@
+openapi: "3.0.2"
+info:
+  version: 1.0.0
+  title: Inheritance test
+paths:
+  /pets:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InheritanceSample'
+      responses:
+        '200':
+          description: success
+
+components:
+  schemas:
+    BaseObject:
+      type: object
+      required:
+        - foo
+      properties:
+        foo:
+          type: string
+      discriminator:
+        propertyName: foo
+
+    InheritanceSample:
+      allOf:
+        - $ref: '#/components/schemas/BaseObject'
+        - type: object
+          properties:
+            bar:
+              type: string
