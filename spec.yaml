@@ -50,6 +50,9 @@ components:
       properties:
         foo:
           type: string
+      discriminator:
+        propertyName: foo
+
     InheritanceSample:
       allOf:
         - $ref: '#/components/schemas/BaseObject'
@@ -57,5 +60,6 @@ components:
           properties:
             bar:
               type: string
+
 servers:
   - url: 'http://localhost:8080'

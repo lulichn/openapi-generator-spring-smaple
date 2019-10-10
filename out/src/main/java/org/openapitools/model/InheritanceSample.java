@@ -15,33 +15,9 @@ import javax.validation.constraints.*;
  * InheritanceSample
  */
 
-public class InheritanceSample   {
-  @JsonProperty("foo")
-  private String foo;
-
+public class InheritanceSample extends BaseObject  {
   @JsonProperty("bar")
   private String bar;
-
-  public InheritanceSample foo(String foo) {
-    this.foo = foo;
-    return this;
-  }
-
-  /**
-   * Get foo
-   * @return foo
-  */
-  @ApiModelProperty(required = true, value = "")
-  @NotNull
-
-
-  public String getFoo() {
-    return foo;
-  }
-
-  public void setFoo(String foo) {
-    this.foo = foo;
-  }
 
   public InheritanceSample bar(String bar) {
     this.bar = bar;
@@ -73,21 +49,20 @@ public class InheritanceSample   {
       return false;
     }
     InheritanceSample inheritanceSample = (InheritanceSample) o;
-    return Objects.equals(this.foo, inheritanceSample.foo) &&
-        Objects.equals(this.bar, inheritanceSample.bar);
+    return Objects.equals(this.bar, inheritanceSample.bar) &&
+        super.equals(o);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(foo, bar);
+    return Objects.hash(bar, super.hashCode());
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InheritanceSample {\n");
-    
-    sb.append("    foo: ").append(toIndentedString(foo)).append("\n");
+    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    bar: ").append(toIndentedString(bar)).append("\n");
     sb.append("}");
     return sb.toString();
