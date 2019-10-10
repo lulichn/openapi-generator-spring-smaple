@@ -1,9 +1,28 @@
-openapi: "3.0.2"
+openapi: 3.0.2
 info:
-  version: 1.0.0
   title: Inheritance test
+  version: 1.0.0
 paths:
-  /pets:
+  /sampleA:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaseObject'
+      responses:
+        '200':
+          description: success
+    get:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseObject'
+  /sampleB:
     post:
       requestBody:
         content:
@@ -13,7 +32,15 @@ paths:
       responses:
         '200':
           description: success
-
+    get:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InheritanceSample'
 components:
   schemas:
     BaseObject:
@@ -23,9 +50,6 @@ components:
       properties:
         foo:
           type: string
-      discriminator:
-        propertyName: foo
-
     InheritanceSample:
       allOf:
         - $ref: '#/components/schemas/BaseObject'
@@ -33,3 +57,5 @@ components:
           properties:
             bar:
               type: string
+servers:
+  - url: 'http://localhost:8080'

@@ -8,7 +8,7 @@ if [ ! -e $GEN ]; then
     chmod +x $GEN
 fi
 
-rm -rf out
+rm -rf out/src
 ./$GEN generate -i spec.yaml -g spring -o out
 
 cd out
