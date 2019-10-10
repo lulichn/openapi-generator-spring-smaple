@@ -14,7 +14,6 @@ import javax.validation.constraints.*;
 /**
  * InheritanceSample
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2019-10-10T17:14:02.142903+09:00[Asia/Tokyo]")
 
 public class InheritanceSample   {
   @JsonProperty("foo")
