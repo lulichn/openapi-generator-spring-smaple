@@ -43,15 +43,10 @@ public interface SampleBApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     default ResponseEntity<InheritanceSample> sampleBGet() {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    ApiUtil.setExampleResponse(request, "application/json", "null");
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        InheritanceSample result = new InheritanceSample();
+        result.setFoo("ret foo");
+        result.setBar("ret bar");
+        return ResponseEntity.ok(result);
 
     }
 
@@ -63,8 +58,6 @@ public interface SampleBApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     default ResponseEntity<Void> sampleBPost(@ApiParam(value = ""  )  @Valid @RequestBody InheritanceSample inheritanceSample) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        return new ResponseEntity<>(HttpStatus.OK);
     }
-
 }

@@ -43,15 +43,9 @@ public interface SampleAApi {
         produces = { "application/json" }, 
         method = RequestMethod.GET)
     default ResponseEntity<BaseObject> sampleAGet() {
-        getRequest().ifPresent(request -> {
-            for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
-                if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    ApiUtil.setExampleResponse(request, "application/json", "{  \"foo\" : \"foo\"}");
-                    break;
-                }
-            }
-        });
-        return new ResponseEntity<>(HttpStatus.OK);
+        BaseObject result = new BaseObject();
+        result.setFoo("ret foo");
+        return ResponseEntity.ok(result);
 
     }
 
@@ -63,8 +57,9 @@ public interface SampleAApi {
         consumes = { "application/json" },
         method = RequestMethod.POST)
     default ResponseEntity<Void> sampleAPost(@ApiParam(value = ""  )  @Valid @RequestBody BaseObject baseObject) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
-
+        BaseObject result = new BaseObject();
+        result.setFoo(baseObject.getFoo().toUpperCase());
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }
